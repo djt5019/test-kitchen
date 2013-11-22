@@ -18,7 +18,7 @@
 
 require 'erb'
 require 'vendor/hash_recursive_merge'
-require 'safe_yaml'
+require 'safe_yaml/load'
 
 module Kitchen
 
@@ -109,7 +109,7 @@ module Kitchen
       def parse_yaml_string(string, file_name)
         return Hash.new if string.nil? || string.empty?
 
-        ::YAML.safe_load(string) || Hash.new
+        SafeYAML.load(string) || Hash.new
       rescue SyntaxError, Psych::SyntaxError
         raise UserError, "Error parsing #{file_name}"
       end
