@@ -125,7 +125,7 @@ module Kitchen
         when "mit" then "MIT"
         when "apachev2" then "Apache 2.0"
         when "lgplv3" then "LGPL 3.0"
-        when "reserved" then "All rights reserved"
+        when "reserved", "none" then "All rights reserved"
         else
           raise ArgumentError, "No such license #{options[:license]}"
         end
@@ -134,7 +134,7 @@ module Kitchen
       def license_filename
         case options[:license]
         when "mit" then "LICENSE.txt"
-        when "apachev2", "reserved" then "LICENSE"
+        when "apachev2", "reserved", "none" then "LICENSE"
         when "lgplv3" then "COPYING"
         else
           raise ArgumentError, "No such license #{options[:license]}"

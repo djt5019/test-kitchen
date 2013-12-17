@@ -61,3 +61,10 @@ Feature: Create a new Test Kitchen Driver project
     """
     All rights reserved - Do Not Redistribute
     """
+
+  Scenario: Running with a license of "none"
+    When I successfully run `kitchen driver create foo --license=none`
+    Then the file "kitchen-foo/LICENSE" should contain:
+    """
+    All rights reserved - Do Not Redistribute
+    """
