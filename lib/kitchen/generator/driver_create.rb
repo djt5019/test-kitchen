@@ -53,7 +53,7 @@ module Kitchen
         create_template("Rakefile.erb", "Rakefile")
         create_template("README.md.erb", "README.md")
         create_template("gemspec.erb", "#{config[:gem_name]}.gemspec")
-        create_template("license_#{config[:license]}.erb", license_filename)
+        create_template("license_#{license_template_file}.erb", license_filename)
         create_template("gitignore.erb", ".gitignore")
         create_template("tailor.erb", ".tailor")
         create_template("travis.yml.erb", ".travis.yml")
@@ -111,6 +111,13 @@ module Kitchen
       def email
         git_user_email = %x{git config user.email}.chomp
         git_user_email.empty? ? "TODO: Write your email" : git_user_email
+      end
+
+      def license_template_file
+        case options[:license]
+        when "none" then "reserved"
+        else options[:license]
+        end
       end
 
       def license_string
